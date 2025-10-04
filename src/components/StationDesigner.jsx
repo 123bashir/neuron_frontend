@@ -122,7 +122,7 @@ const StationDesigner = ({ selectedDesign = null, onDesignUpdate = () => {}, onC
     return () => window.removeEventListener('keydown', handler);
   }, [selection, setNodes, setEdges]);
 
-  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
+  const API_BASE = import.meta.env.VITE_API_BASE || 'https://neuron-backed.onrender.com';
 
   const parseMaybeJSON = (val) => {
     if (!val) return [];

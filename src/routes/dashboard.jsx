@@ -26,7 +26,7 @@ const Dashboard = () => {
     type: 'info'
   });
   const [showStationDesigner, setShowStationDesigner] = useState(false);
-  const backendUrl = "http://localhost:5000"; // Change to your deployed backend URL
+  const backendUrl = "https://neuron-backed.onrender.com"; // Change to your deployed backend URL
 
   // Get userId from current user
   const userId = currentUser?.userId || "user_001";
