@@ -6,7 +6,7 @@ import Login from "./routes/login";
 import Register from "./routes/register";
 import About from "./routes/about";
 import Contact from "./routes/contact";
-import Dashboard from "./routes/dashboard";
+import StationDesigner from "./components/StationDesigner";
 import Features from "./routes/features";
 import NotFound from "./routes/NotFound";
 
@@ -50,7 +50,7 @@ function App() {
     { path: "/about", element: <About /> },
     { path: "/contact", element: <Contact /> },
     { path: "/features", element: <Features /> },
-    { path: "/dashboard", element: <ProtectedRoute element={<Dashboard />} /> },
+  { path: "/dashboard", element: <ProtectedRoute element={<StationDesigner />} /> },
     { path: "*", element: <NotFound /> },
   ]);
 

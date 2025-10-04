@@ -69,9 +69,10 @@ const Dashboard = () => {
   const fetchDesigns = async () => {
     try {
       const res = await axios.get(`${backendUrl}/list/${userId}`);
-      setDesigns(res.data);
+      setDesigns(res.data || []);
     } catch (err) {
       console.error("Error fetching designs:", err);
+      setDesigns([]);
     }
   };
 
@@ -118,8 +119,9 @@ const Dashboard = () => {
 
   // Create new design
   const createNewDesign = () => {
+    const defaultName = `New Design - ${new Date().toLocaleString()}`;
     setSelectedDesign({
-      name: "",
+      name: defaultName,
       viewMode: "default",
       elements: [],
       connections: [],
