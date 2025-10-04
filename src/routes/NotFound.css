@@ -1,0 +1,523 @@
+/* NotFound Page Styles */
+.notfound-page {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.notfound-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 3s infinite;
+}
+
+.star:nth-child(odd) {
+  animation-delay: 1s;
+}
+
+.star:nth-child(3n) {
+  animation-delay: 2s;
+}
+
+.star:nth-child(5n) {
+  animation-delay: 0.5s;
+}
+
+.star:nth-child(7n) {
+  animation-delay: 1.5s;
+}
+
+.star:nth-child(1) { top: 10%; left: 20%; width: 2px; height: 2px; }
+.star:nth-child(2) { top: 20%; left: 80%; width: 1px; height: 1px; }
+.star:nth-child(3) { top: 30%; left: 40%; width: 3px; height: 3px; }
+.star:nth-child(4) { top: 40%; left: 70%; width: 1px; height: 1px; }
+.star:nth-child(5) { top: 50%; left: 10%; width: 2px; height: 2px; }
+.star:nth-child(6) { top: 60%; left: 90%; width: 1px; height: 1px; }
+.star:nth-child(7) { top: 70%; left: 30%; width: 2px; height: 2px; }
+.star:nth-child(8) { top: 80%; left: 60%; width: 1px; height: 1px; }
+.star:nth-child(9) { top: 15%; left: 50%; width: 3px; height: 3px; }
+.star:nth-child(10) { top: 25%; left: 15%; width: 1px; height: 1px; }
+
+.space-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(30, 60, 114, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+}
+
+.floating-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(74, 144, 226, 0.6);
+  border-radius: 50%;
+  animation: floatUp 5s linear infinite;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.8);
+}
+
+.notfound-container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.notfound-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.notfound-visual {
+  flex: 1;
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Astronaut Animation */
+.astronaut {
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
+
+.astronaut-body {
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, #4a90e2 0%, #2a5298 100%);
+  border-radius: 30px 30px 20px 20px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(74, 144, 226, 0.6);
+}
+
+.astronaut-helmet {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border: 3px solid rgba(74, 144, 226, 0.8);
+  border-radius: 50%;
+  position: absolute;
+  top: -40px;
+  left: -10px;
+  box-shadow: 
+    0 0 30px rgba(74, 144, 226, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.astronaut-antenna {
+  width: 2px;
+  height: 20px;
+  background: #ffd700;
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+.astronaut-flag {
+  position: absolute;
+  top: 20px;
+  right: -30px;
+}
+
+.flag-pole {
+  width: 2px;
+  height: 40px;
+  background: #ffd700;
+  border-radius: 1px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+.flag-cloth {
+  width: 30px;
+  height: 20px;
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  position: absolute;
+  top: 0;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: bold;
+  color: white;
+  border-radius: 2px;
+  animation: wave 2s ease-in-out infinite;
+}
+
+/* Planet Animation */
+.planet {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
+  box-shadow: 
+    0 0 40px rgba(139, 69, 19, 0.6),
+    inset -20px -20px 40px rgba(0, 0, 0, 0.3);
+  animation: rotate 20s linear infinite;
+}
+
+.planet-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(160, 82, 45, 0.8) 0%, transparent 50%),
+    radial-gradient(circle at 70% 20%, rgba(139, 69, 19, 0.6) 0%, transparent 40%),
+    radial-gradient(circle at 20% 70%, rgba(160, 82, 45, 0.7) 0%, transparent 45%);
+}
+
+.planet-craters {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.crater {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.crater-1 {
+  width: 15px;
+  height: 15px;
+  top: 20%;
+  left: 30%;
+}
+
+.crater-2 {
+  width: 10px;
+  height: 10px;
+  top: 60%;
+  left: 60%;
+}
+
+.crater-3 {
+  width: 8px;
+  height: 8px;
+  top: 40%;
+  left: 70%;
+}
+
+/* Floating Elements */
+.floating-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.element {
+  position: absolute;
+  font-size: 24px;
+  animation: floatAround 8s ease-in-out infinite;
+}
+
+.element-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.element-2 { top: 20%; right: 10%; animation-delay: 1s; }
+.element-3 { top: 60%; left: 5%; animation-delay: 2s; }
+.element-4 { bottom: 20%; right: 20%; animation-delay: 3s; }
+.element-5 { top: 40%; right: 5%; animation-delay: 4s; }
+.element-6 { bottom: 10%; left: 20%; animation-delay: 5s; }
+
+.notfound-text {
+  flex: 1;
+  text-align: center;
+  max-width: 500px;
+}
+
+.notfound-title {
+  font-size: 120px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #4a90e2 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  text-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.notfound-subtitle {
+  font-size: 36px;
+  font-weight: 600;
+  color: #4a90e2;
+  margin: 10px 0 30px 0;
+  text-shadow: 0 0 20px rgba(74, 144, 226, 0.6);
+}
+
+.notfound-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ccc;
+  margin: 0 0 20px 0;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.notfound-suggestion {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #999;
+  margin: 0 0 40px 0;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.notfound-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.notfound-button {
+  position: relative;
+  background: linear-gradient(135deg, #4a90e2 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+  overflow: hidden;
+}
+
+.notfound-button.secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.notfound-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+}
+
+.notfound-button.secondary:hover {
+  box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+}
+
+.button-icon {
+  font-size: 18px;
+}
+
+.button-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.notfound-button:hover .button-glow {
+  left: 100%;
+}
+
+.notfound-help {
+  border-top: 1px solid rgba(74, 144, 226, 0.3);
+  padding-top: 30px;
+}
+
+.notfound-help p {
+  color: #999;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+}
+
+.help-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.help-link {
+  color: #4a90e2;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
+.help-link:hover {
+  background: rgba(74, 144, 226, 0.1);
+  border-color: rgba(74, 144, 226, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(90vh) scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(10vh) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0vh) scale(0);
+  }
+}
+
+@keyframes floatAround {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-15px) rotate(90deg); }
+  50% { transform: translateY(0px) rotate(180deg); }
+  75% { transform: translateY(-10px) rotate(270deg); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 30px rgba(74, 144, 226, 0.5); }
+  100% { text-shadow: 0 0 50px rgba(74, 144, 226, 0.8); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .notfound-content {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .notfound-visual {
+    height: 300px;
+  }
+  
+  .notfound-title {
+    font-size: 80px;
+  }
+  
+  .notfound-subtitle {
+    font-size: 28px;
+  }
+  
+  .notfound-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .notfound-button {
+    width: 200px;
+  }
+  
+  .help-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .planet {
+    width: 80px;
+    height: 80px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .astronaut-body {
+    width: 40px;
+    height: 60px;
+  }
+  
+  .astronaut-helmet {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notfound-title {
+    font-size: 60px;
+  }
+  
+  .notfound-subtitle {
+    font-size: 24px;
+  }
+  
+  .notfound-description,
+  .notfound-suggestion {
+    font-size: 14px;
+  }
+  
+  .notfound-button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
