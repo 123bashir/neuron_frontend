@@ -154,8 +154,16 @@ const Landing = () => {
           <div className="hero-visual">
             <div className="earth-scene" aria-hidden="true">
               <div className="earth" ref={earthRef}>
-                {/* replaced with public/bb.jpg */}
-                <img src="/bb.jpg" alt="Earth" className="earth-img" />
+                {/* replaced static image with looping animation video (public/bb.mp4) */}
+                <video
+                  className="earth-video"
+                  src="/bb.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-hidden="true"
+                />
                 <img src="/assets/earth-clouds.png" alt="" className="earth-clouds" />
                 <div className="earth-glow" />
               </div>

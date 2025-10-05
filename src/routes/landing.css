@@ -307,7 +307,7 @@ body {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: center; /* center whole row vertically in viewport */
   position: relative;
   padding: 0 2rem;
   overflow: hidden;
@@ -315,18 +315,21 @@ body {
 
 .hero-content {
   display: flex;
-  align-items: center;
+  align-items: center; /* IMPORTANT: center text and visual vertically */
   justify-content: space-between;
   gap: 3rem;
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 2.5rem 2rem; /* slightly reduced top padding so text isn't pushed down */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .hero-text {
   flex: 1;
   min-width: 280px;
-  opacity: 0;
-  transform: translateX(-50px);
-  animation: slideInLeft 1s ease 0.5s forwards;
+  margin-top: 0;
+  padding-top: 0;
+  align-self: center; /* align with the visual */
 }
 
 .hero-title {
@@ -400,10 +403,14 @@ body {
 /* Hero Visual */
 .hero-visual {
   position: relative;
-  height: 600px;
-  opacity: 0;
-  transform: translateX(50px);
-  animation: slideInRight 1s ease 0.7s forwards;
+  height: auto;          /* let content determine height */
+  max-height: 600px;     /* keep a sensible max */
+  display: flex;
+  align-items: center;   /* center video vertically inside visual column */
+  justify-content: center;
+  opacity: 1;
+  transform: none;
+  animation: none;
 }
 
 .earth-container {
@@ -1139,6 +1146,19 @@ body {
   transform: translateZ(0.5px); /* slight 3d pop for GPU */
 }
 
+/* Video style to replace earth image */
+.earth-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* hint to GPU */
+}
+
 /* Clouds layer rotates slightly faster */
 .earth-clouds {
   position: absolute;
@@ -1557,4 +1577,87 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-color);
+}
+
+/* Ensure hero layout keeps text and visual on the same horizontal level */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center; /* center whole row vertically in viewport */
+  position: relative;
+  padding: 0 2rem;
+  overflow: hidden;
+}
+
+/* Keep columns row-aligned and vertically centered */
+.hero-content {
+  display: flex;
+  align-items: center; /* IMPORTANT: center text and visual vertically */
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 2.5rem 2rem; /* slightly reduced top padding so text isn't pushed down */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Make sure text block doesn't get extra top margin */
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+  margin-top: 0;
+  padding-top: 0;
+  align-self: center; /* align with the visual */
+}
+
+/* Visual side should size to content and center its internal media */
+.hero-visual {
+  position: relative;
+  height: auto;          /* let content determine height */
+  max-height: 600px;     /* keep a sensible max */
+  display: flex;
+  align-items: center;   /* center video vertically inside visual column */
+  justify-content: center;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* ensure the earth/video doesn't force extra vertical offset */
+.earth {
+  margin: 0;
+  display: block;
+  align-self: center;
+}
+
+/* make video contained and centered */
+.earth-video, .earth-img {
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* responsive tweaks: keep them side-by-side on wider phones/tablets */
+@media (max-width: 900px) {
+  .hero-content {
+    gap: 1.6rem;
+    padding: 1.5rem 1rem;
+  }
+  .earth-video, .earth-img {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+/* mobile: stack but keep text above visual (user expectation) */
+@media (max-width: 480px) {
+  .hero-content {
+    flex-direction: column; /* text above video on small screens */
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .hero-text { text-align: center; }
+  .earth-video, .earth-img { width: 200px; height: 200px; }
 }
