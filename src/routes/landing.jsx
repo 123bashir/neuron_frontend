@@ -1,27 +1,45 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './landing.css';
 
 const Landing = () => {
   const earthRef = useRef(null);
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // removed video state — replaced by AI flow
 
   // Navigation functions
   const handleGetStarted = () => {
-    navigate('/login');
+    navigate('/dashboard');
+    setMobileMenuOpen(false);
   };
 
   const handleStartCreating = () => {
-    navigate('/register');
+    navigate('/dashboard');
+    setMobileMenuOpen(false);
   };
 
-  const handleWatchDemo = () => {
-    // You can add demo functionality here
-    console.log('Watch Demo clicked');
+  const handleUseAI = () => {
+    // go to AI prompt page
+    navigate('/ai');
+    setMobileMenuOpen(false);
+  };
+
+  // close menu on Escape
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape' && mobileMenuOpen) setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [mobileMenuOpen]);
+
+  // close when clicking outside the menu content
+  const onOverlayClick = (e) => {
+    if (e.target === e.currentTarget) setMobileMenuOpen(false);
   };
 
   useEffect(() => {
-    // Add scroll animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -35,13 +53,21 @@ const Landing = () => {
       });
     }, observerOptions);
 
-    // Observe all sections
     document.querySelectorAll('.section').forEach(section => {
       observer.observe(section);
     });
 
     return () => observer.disconnect();
   }, []);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [mobileMenuOpen]);
 
   return (
     <div className="landing-page">
@@ -63,18 +89,44 @@ const Landing = () => {
               <span className="logo-text">Neuron</span>
             </div>
           </div>
-          <div className="nav-links">
-            <a href="/features" className="nav-link">Features</a>
-            <a href="/about" className="nav-link">About</a>
-            <a href="/contact" className="nav-link">Contact</a>
-            <button className="cta-button" onClick={handleGetStarted}>Login</button>
+          <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+            <a href="/features" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Features</a>
+            <a href="/about" className="nav-link" onClick={() => setMobileMenuOpen(false)}>About</a>
+            <a href="/contact" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+            {/* header CTA removed as requested */}
           </div>
-          <div className="mobile-menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <button
+            className={`mobile-menu-toggle ${mobileMenuOpen ? 'open' : ''}`}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </nav>
+        {/* Mobile menu overlay */}
+        <div
+          className={`mobile-menu-overlay ${mobileMenuOpen ? 'show' : ''}`}
+          onClick={onOverlayClick}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="mobile-menu-content" role="document">
+            <button
+              className="mobile-menu-close"
+              aria-label="Close menu"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              ✕
+            </button>
+            <a href="/features" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Features</a>
+            <a href="/about" className="nav-link" onClick={() => setMobileMenuOpen(false)}>About</a>
+            <a href="/contact" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+            {/* mobile CTA removed to match header */}
+          </div>
+        </div>
       </header>
 
       {/* Hero Section */}
@@ -94,62 +146,21 @@ const Landing = () => {
                 <span>Start Creating</span>
                 <div className="button-glow"></div>
               </button>
-              <button className="secondary-button" onClick={handleWatchDemo}>
-                <span>Watch Demo</span>
-                <div className="play-icon">▶</div>
+              <button className="secondary-button" onClick={handleUseAI}>
+                <span>Use AI</span>
               </button>
             </div>
           </div>
           <div className="hero-visual">
-            <div className="kano-map-container">
-              <div className="kano-map-revolving" ref={earthRef}>
-                <div className="kano-map-globe">
-                  <div className="kano-surface"></div>
-                  <div className="kano-districts">
-                    <div className="district dala">Dala</div>
-                    <div className="district fagge">Fagge</div>
-                    <div className="district gwale">Gwale</div>
-                    <div className="district kano-municipal">Kano Municipal</div>
-                    <div className="district nassarawa">Nassarawa</div>
-                    <div className="district taruni">Taruni</div>
-                    <div className="district unguwa">Unguwa</div>
-                    <div className="district kumbotso">Kumbotso</div>
-                  </div>
-                  <div className="kano-landmarks">
-                    <div className="landmark airport">✈️</div>
-                    <div className="landmark palace">🏰</div>
-                    <div className="landmark market">🏪</div>
-                    <div className="landmark university">🎓</div>
-                    <div className="landmark stadium">🏟️</div>
-                    <div className="landmark hospital">🏥</div>
-                  </div>
-                  <div className="kano-roads">
-                    <div className="road road-1"></div>
-                    <div className="road road-2"></div>
-                    <div className="road road-3"></div>
-                    <div className="road road-4"></div>
-                    <div className="road road-5"></div>
-                  </div>
-                  <div className="kano-center">
-                    <div className="center-point"></div>
-                  </div>
-                </div>
-                <div className="kano-atmosphere"></div>
-                <div className="kano-glow"></div>
+            <div className="earth-scene" aria-hidden="true">
+              <div className="earth" ref={earthRef}>
+                {/* replaced with public/bb.jpg */}
+                <img src="/bb.jpg" alt="Earth" className="earth-img" />
+                <img src="/assets/earth-clouds.png" alt="" className="earth-clouds" />
+                <div className="earth-glow" />
               </div>
-              <div className="orbit-ring orbit-1">
-                <div className="satellite satellite-1">🛰️</div>
-              </div>
-              <div className="orbit-ring orbit-2">
-                <div className="satellite satellite-2">🛰️</div>
-              </div>
-              <div className="orbit-ring orbit-3">
-                <div className="satellite satellite-3">🛰️</div>
-              </div>
-              <div className="stars">
-                {[...Array(100)].map((_, i) => (
-                  <div key={i} className={`star star-${i + 1}`}></div>
-                ))}
+              <div className="orbiting-satellites" aria-hidden="true">
+                <div className="satellite">🛰️</div>
               </div>
             </div>
           </div>
@@ -158,6 +169,8 @@ const Landing = () => {
           <div className="scroll-arrow"></div>
         </div>
       </section>
+
+      {/* "Use AI" flow handled on /ai route */}
 
       {/* Features Section */}
       <section id="features" className="features section">

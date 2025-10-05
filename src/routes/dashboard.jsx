@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import ModernPopup from "../components/ModernPopup";
 import StationDesigner from "../components/StationDesigner";
 import axios from "axios";
@@ -8,7 +7,6 @@ import "./dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { currentUser, logout } = useAuth();
   const [designs, setDesigns] = useState([]);
   const [selectedDesign, setSelectedDesign] = useState(null);
   const [newDesign, setNewDesign] = useState({
@@ -29,7 +27,6 @@ const Dashboard = () => {
   const backendUrl = "https://neuron-backed.onrender.com"; // Change to your deployed backend URL
 
   // Get userId from current user
-  const userId = currentUser?.userId || "user_001";
 
   const handleLogout = () => {
     // Show logout confirmation popup
@@ -169,147 +166,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={styles.container}>
-      {/* User Header */}
-      <div style={styles.header}>
-        <div style={styles.userInfo}>
-          <h2 style={styles.title}>🧩 Dashboard — Canvas Manager</h2>
-          <div style={styles.userDetails}>
-            <span style={styles.welcomeText}>
-              Welcome, {currentUser?.firstName} {currentUser?.lastName}!
-            </span>
-            <span style={styles.roleText}>
-              {currentUser?.role} at {currentUser?.organization}
-            </span>
-          </div>
-        </div>
-        <button onClick={handleLogout} style={styles.logoutButton}>
-          🚪 Logout
-        </button>
-      </div>
-
-      {/* Design Actions */}
-      <div style={styles.card}>
-        <h3>🚀 Design Actions</h3>
-        <div style={styles.actionButtons}>
-          <button onClick={createNewDesign} style={styles.primaryButton}>
-            🏗️ Create New Design
-          </button>
-          <div style={styles.divider}>or</div>
-          <div style={styles.quickSave}>
-            <input
-              type="text"
-              placeholder="Enter design name"
-              value={newDesign.name}
-              onChange={(e) => setNewDesign({ ...newDesign, name: e.target.value })}
-              style={styles.input}
-            />
-            <button onClick={saveDesign} disabled={loading} style={styles.button}>
-              {loading ? "Saving..." : "💾 Quick Save"}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* All Designs */}
-      <div style={styles.card}>
-        <h3>Saved Designs</h3>
-        {designs.length === 0 ? (
-          <p>No designs found.</p>
-        ) : (
-          <table style={styles.table}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>View Mode</th>
-                <th>Parts</th>
-                <th>Created</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {designs.map((design) => (
-                <tr key={design.id}>
-                  <td>{design.id}</td>
-                  <td>{design.name}</td>
-                  <td>{design.viewMode}</td>
-                  <td>{design.partsCount}</td>
-                  <td>{new Date(design.createdAt).toLocaleString()}</td>
-                  <td>
-                    <button
-                      onClick={() => loadDesign(design.id)}
-                      style={styles.smallButton}
-                      title="Open in appropriate designer"
-                    >
-                      🎨 Open
-                    </button>
-                    <button
-                      onClick={() => deleteDesign(design.id)}
-                      style={{ ...styles.smallButton, background: "#dc3545" }}
-                    >
-                      🗑️ Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-
-      {/* Selected Design */}
-      {selectedDesign && (
-        <div style={styles.card}>
-          <h3>Edit Design: {selectedDesign.name}</h3>
-          <input
-            type="text"
-            value={selectedDesign.name}
-            onChange={(e) =>
-              setSelectedDesign({ ...selectedDesign, name: e.target.value })
-            }
-            style={styles.input}
-          />
-          <input
-            type="number"
-            value={selectedDesign.partsCount}
-            onChange={(e) =>
-              setSelectedDesign({
-                ...selectedDesign,
-                partsCount: parseInt(e.target.value),
-              })
-            }
-            style={styles.input}
-            placeholder="Parts Count"
-          />
-          <button onClick={updateDesign} style={styles.button}>
-            Update Design
-          </button>
-        </div>
-      )}
-
-      {/* Architecture Designer */}
-      {showStationDesigner && (
-        <StationDesigner
-          selectedDesign={selectedDesign}
-          onDesignUpdate={handleDesignUpdate}
-          onClose={closeStationDesigner}
-        />
-      )}
-
-      {/* Modern Popup */}
-      <ModernPopup
-        isOpen={popup.isOpen}
-        onClose={() => setPopup({ ...popup, isOpen: false })}
-        title={popup.title}
-        message={popup.message}
-        type={popup.type}
-        showConfirmButton={popup.showConfirmButton}
-        onConfirm={popup.onConfirm}
-        confirmText="Logout"
-        cancelText="Cancel"
-        autoClose={popup.type === 'success'}
-        autoCloseDelay={3000}
+    // replace dashboard UI with a full-viewport embedded ArchViz site
+    <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', background: '#000', zIndex: 9999 }}>
+      <iframe
+        src="https://threejs-archviz.vercel.app/"
+        title="ThreeJS ArchViz"
+        style={{ width: '100%', height: '100%', border: '0', display: 'block' }}
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
       />
     </div>
   );

@@ -1,14 +1,13 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { AuthProvider, useAuth } from "./context/AuthContext";
 import Landing from "./routes/landing";
-import Login from "./routes/login";
-import Register from "./routes/register";
 import About from "./routes/about";
 import Contact from "./routes/contact";
+import AiPrompt from "./routes/ai";
 import StationDesigner from "./components/StationDesigner";
 import Features from "./routes/features";
 import NotFound from "./routes/NotFound";
+import Dashboard from "./routes/dashboard";
 
 
 
@@ -45,12 +44,14 @@ function App() {
 
   const router = createBrowserRouter([
     { path: "/", element: <Landing /> },
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
+  
     { path: "/about", element: <About /> },
     { path: "/contact", element: <Contact /> },
     { path: "/features", element: <Features /> },
-  { path: "/dashboard", element: <ProtectedRoute element={<StationDesigner />} /> },
+        { path: "/dashboard", element: <Dashboard /> },
+                { path: "/ai", element: <AiPrompt /> },
+
+
     { path: "*", element: <NotFound /> },
   ]);
 
